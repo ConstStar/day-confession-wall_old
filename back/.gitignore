@@ -1,12 +1,12 @@
 # Default ignored files
-/shelf/
-/workspace.xml
+/.idea/shelf/
+/.idea/workspace.xml
 # Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
+/.idea/dataSources/
+/.idea/dataSources.local.xml
 # Editor-based HTTP Client requests
-/httpRequests/
+/.idea/httpRequests/
 # 临时文件
-/../log/
+/log/
 # 生成文件
-/../target
+/target
