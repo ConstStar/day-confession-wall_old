@@ -2,7 +2,11 @@
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
-/../../../../../../:\用户文档\桌面\表白墙\biaobai\.idea/dataSources/
+/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+# 临时文件
+/../log/
+# 生成文件
+/../target
