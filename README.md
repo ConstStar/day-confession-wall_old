@@ -6,14 +6,20 @@
 
 ### 目录
 
-- back   <!--后端代码（java）-->
-- web   <!--前端代码（vue）-->
+- back   *后端代码（java）*
+- web   *前端代码（vue）*
 
 
 
 ### 演示
 
 [演示页面](http://39.107.228.202:8081/biaobai)
+
+
+
+#### 接口手册
+
+[HELP_API](/HELP_API.md)
 
 
 
