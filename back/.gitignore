@@ -9,4 +9,4 @@
 # 临时文件
 /log/
 # 生成文件
-/target
+/target/
