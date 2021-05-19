@@ -5,7 +5,7 @@
 
     <mapper namespace="cn.xiaoxiaoge.dao.CommentMapper">
 
-    <cache/>
+<!--    <cache/>-->
     <!--获取帖子分页评论列表-->
     <select id="getComments" parameterType="map" resultType="comment">
         select * from biaobai.comment where p_id=#{pId} order by create_time DESC limit #{startIndex},#{pageSize};

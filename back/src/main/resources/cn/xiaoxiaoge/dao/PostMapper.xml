@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.xiaoxiaoge.dao.PostMapper">
-    <cache/>
+<!--    <cache/>-->
 
     <!--使用sql分页-->
     <select id="getPosts" parameterType="map" resultType="post">
