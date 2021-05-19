@@ -63,7 +63,8 @@ export default {
           id: v.id,
           data: v,
           time: this.getRandomInt(10, 20),
-          barrageStyle: 'barrageStyle'
+          barrageStyle: 'barrageStyle',
+          extraWidth: window.screen.width * 0.15 + (1536 - window.screen.width) * 0.8 //防止循环回来出现弹幕覆盖
         })
       }
     },
@@ -87,7 +88,7 @@ export default {
   position: absolute;
   overflow: hidden;
   top: 0;
-  margin-top: 130px;
+  margin-top: 5rem;
   margin-bottom: 130px;
 }
 
