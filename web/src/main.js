@@ -14,7 +14,7 @@ import Barrages from './components/module/Vue-Baberrage'
 // 帖子
 import PostComponent from './components/module/Post'
 
-Vue.component('barrages', Barrages);
+Vue.component('barrages', Barrages)
 Vue.component('Post', PostComponent)
 
 // 使用模块
@@ -61,6 +61,10 @@ Vue.prototype.toDates = function (times) {
   }
   dateTime = Y + '年' + M + '月' + D + '日\xa0' + H + ':' + Min
   return dateTime
+}
+
+Vue.prototype.getIsMobile = function () {
+  return window.screen.width < 1000
 }
 
 //

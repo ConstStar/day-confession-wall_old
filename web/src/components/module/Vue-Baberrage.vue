@@ -84,18 +84,20 @@ export default {
   border: 1px solid #000;
 }
 
+.barrages-drop {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
 .barrages-drop .baberrage-stage {
-  position: absolute;
-  overflow: hidden;
   top: 0;
-  margin-top: 5rem;
-  margin-bottom: 130px;
+  padding-bottom: 5rem;
 }
 
 .name {
   font-weight: bold;
   color: #303133;
-  cursor: pointer;
 
   display: inline-block;
   margin-left: 0.6rem;
@@ -105,4 +107,5 @@ export default {
 .xin {
   color: red;
 }
+
 </style>

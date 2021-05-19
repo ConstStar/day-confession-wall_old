@@ -1,30 +1,67 @@
 <template>
   <el-container class="home-container">
-    <el-header>
+    <el-header v-if="isMobile==false">
       <span style="margin-right: auto;margin-left: 3rem">day墙(这个名字真他妈难听)</span>
-      <div class="menu">
-        <router-link class="item" tag="div" to="/Home">
-          <i class="fas fa-home"></i>
+      <el-menu class="menu" :default-active="activeIndex" mode="horizontal" @select="handleSelect">
+        <el-menu-item class="item" index="/Home">
+          <i class="ico fas fa-home"></i>
           主页
-        </router-link>
-        <router-link class="item" tag="div" to="/PostList">
-          <i class="fas fa-clipboard"></i>
+        </el-menu-item>
+        <el-menu-item class="item" index="/PostList">
+          <i class="ico fas fa-clipboard"></i>
           表白墙
-        </router-link>
-        <router-link class="item" tag="div" to="/Confession">
-          <i class="fas fa-heart"></i>
+        </el-menu-item>
+        <el-menu-item class="item" index="/Confession">
+          <i class="ico fas fa-heart"></i>
           我要表白
-        </router-link>
-        <router-link class="item" tag="div" to="/Help">
-          <i class="fas fa-question"></i>
+        </el-menu-item>
+        <el-menu-item class="item" index="/Help">
+          <i class="ico fas fa-question"></i>
           帮助
-        </router-link>
-      </div>
+        </el-menu-item>
+      </el-menu>
+
       <el-input v-model="SearchKeyword" @keyup.enter.native="goSearch" placeholder="请输入你想搜索的数据"
                 style="width: 18.75rem;margin-left: 1.25rem">
         <el-button @click="goSearch" slot="append" icon="el-icon-search"></el-button>
       </el-input>
+
     </el-header>
+    <el-header v-else>
+      <span style="margin-right: auto;margin-left: 3rem">day墙(这个名字真他妈难听)</span>
+      <span @click="changeMenuState" class="btn-menu el-icon-menu"></span>
+    </el-header>
+    <el-row v-if="isMenuState" class="tac">
+      <el-col>
+        <el-menu
+          default-active="2"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+          @select="handleSelect">
+          <el-menu-item index="/Home">
+            <i class="ico fas fa-home"></i>
+            <span slot="title">主页</span>
+          </el-menu-item>
+          <el-menu-item index="/PostList">
+            <i class="ico fas fa-clipboard"></i>
+            <span slot="title">表白墙</span>
+          </el-menu-item>
+          <el-menu-item index="/Confession">
+            <i class="ico fas fa-heart"></i>
+            <span slot="title">我要表白</span>
+          </el-menu-item>
+          <el-menu-item index="/Help">
+            <i class="ico fas fa-question"></i>
+            <span slot="title">帮助</span>
+          </el-menu-item>
+          <el-input v-model="SearchKeyword" @keyup.enter.native="goSearch" placeholder="请输入你想搜索的数据"
+                    style="width: 100%;margin-top:0.8rem;margin-bottom:0.4rem">
+          </el-input>
+        </el-menu>
+      </el-col>
+    </el-row>
+
     <el-container>
       <el-main>
         <router-view></router-view>
@@ -37,10 +74,29 @@
 export default {
   data () {
     return {
-      // activeIndex: '1',
+      //是否为手机端
+      isMobile: false,
+      activeIndex: '1',
       // 搜索关键词
-      SearchKeyword: ''
+      SearchKeyword: '',
+      //是否展开侧边导航栏
+      isMenuState: false
     }
+  },
+  created () {
+    //获取当前是否为手机端
+    this.isMobile = this.getIsMobile()
+    //获取路由路径
+    this.activeIndex = this.$route.path
+  },
+  watch: {
+    // isMenuOpen (newValue,oldValue) {
+    //   if(newValue){
+    //
+    //   }else{
+    //
+    //   }
+    // }
   },
   methods: {
     goSearch () {
@@ -48,6 +104,16 @@ export default {
         name: 'Search',
         params: { keyword: this.SearchKeyword }
       })
+    },
+    //跳转导航
+    handleSelect (key, keyPath) {
+      this.$router.push({
+        path: key
+      })
+    },
+    //打开或关闭侧边导航栏
+    changeMenuState () {
+      this.isMenuState = !this.isMenuState
     }
   }
 }
@@ -60,16 +126,8 @@ export default {
   margin-right: calc(100% - 100vw);
 }
 
-.el-header {
+.item, .el-header {
   background-color: #3B6FA8;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-weight: bold;
-  font-size: 1.25rem;
-  padding-left: 5.5rem;
-  padding-right: 5.5rem;
-  color: white;
 }
 
 .el-aside {
@@ -83,27 +141,48 @@ export default {
   align-items: center;
 }
 
-.menu {
-  border: 0;
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
-  display: flex;
+@media screen and (max-width: 1600px) and (min-width: 1000px) {
+  .menu {
+    border-bottom: none !important;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+    /*display: flex;*/
+  }
+
+  .el-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: bold;
+    font-size: 1.25rem;
+    padding-left: 5.5rem;
+    padding-right: 5.5rem;
+    color: white;
+  }
 }
 
-.menu i {
-  padding-right: 0.75rem;
+@media screen and (max-width: 1000px) {
+  .menu {
+    border-bottom: none !important;
+    display: flex;
+  }
+
+  .el-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: white;
+  }
 }
+
 
 .item {
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
-  line-height: 3.5rem;
-  width: 7rem;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
-  /*border-bottom: 5rem solid transparent;*/
   /* 移入时鼠标变成小手 */
   cursor: pointer;
 }
@@ -111,5 +190,23 @@ export default {
 .router-link-active {
   color: #ffc107;
   border-bottom: 0.3rem solid #ffc107;
+}
+
+.ico {
+  display: inline-block;
+  margin-right: 0.2rem;
+}
+
+/* 侧边导航栏 */
+.btn-menu {
+  /*display: flex;*/
+  /*justify-content: flex-end;*/
+
+  cursor: pointer;
+}
+
+.tac {
+  width: 100%;
+  /*height: 100%;*/
 }
 </style>
