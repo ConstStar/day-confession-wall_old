@@ -57,7 +57,7 @@ export default {
     },
     //每隔一段时间添加一个弹幕
     timerMonitor: function () {
-      var v = this.posts.pop()
+      var v = this.posts.shift()
       if (v != undefined) {
         this.barrageList.push({
           id: v.id,
