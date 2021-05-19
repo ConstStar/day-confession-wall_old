@@ -21,7 +21,7 @@ Vue.component('Post', PostComponent)
 Vue.use(vueBaberrage)
 
 
-axios.defaults.baseURL = 'http://39.107.228.202:8081/biaobai-1.0/'
+axios.defaults.baseURL = ''
 
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
