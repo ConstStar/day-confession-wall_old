@@ -7,18 +7,19 @@ import './assets/css/global.css'
 import './assets/Iconiconfont/css/all.css'
 import axios from 'axios'
 import { vueBaberrage } from 'vue-baberrage'
-// 全局引用弹幕组件
+// 全局模块
+
+// 弹幕
 import Barrages from './components/module/Vue-Baberrage'
+// 帖子
+import PostComponent from './components/module/Post'
 
 Vue.component('barrages', Barrages);
+Vue.component('Post', PostComponent)
 
 //使用弹幕插件
 Vue.use(vueBaberrage)
 
-//模块
-import Post from './components/module/Post'
-
-Vue.use(Post)
 
 axios.defaults.baseURL = 'http://39.107.228.202:8081/biaobai-1.0/'
 

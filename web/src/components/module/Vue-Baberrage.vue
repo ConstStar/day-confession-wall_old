@@ -7,109 +7,62 @@
       :throttleGap="throttleGap"
       :loop="barrageLoop"
       :boxHeight="boxHeight"
-      :messageHeight="messageHeight">
+      :messageHeight="messageHeight"
+    >
+<!--      <template v-slot:default="slotProps">-->
+<!--        <span style="color: #000">-->
+<!--&lt;!&ndash;          {{slotProps.item.data.sender}} : {{slotProps.item.data.recipient}}&ndash;&gt;-->
+<!--          h-->
+<!--        </span>-->
+<!--      </template>-->
     </vue-baberrage>
   </div>
 </template>
 <script>
-  import Vue from 'vue';
-  import { vueBaberrage, MESSAGE_TYPE } from 'vue-baberrage';
+  import Vue from 'vue'
+  import { vueBaberrage, MESSAGE_TYPE } from 'vue-baberrage'
 
-  Vue.use(vueBaberrage);
+  Vue.use(vueBaberrage)
 
   export default {
-    props: ['item', 'isShow'],
+    props: ['posts', 'isShow'],
     name: 'Barrages',
-    data() {
+    data () {
       return {
-        msg: item,
-        barrageIsShow: isShow,
-        messageHeight: 5,
+        list: [],
+        barrageIsShow: this.isShow,
+        messageHeight: 3,
         boxHeight: 150,
         barrageLoop: true,
         maxWordCount: 3,
         throttleGap: 5000,
         // 弹幕数据列表
         barrageList: []
-      };
+      }
     },
-    mounted() {
-      this.addToList();
+    mounted () {
+      this.addToList()
+    },
+    watch:{
+      posts(newValue,oldValue){
+        this.barrageList = newValue
+        for (var i = 0; i < this.barrageList.length; i++){
+          this.list.push(this.barrageList[i].content)
+        }
+        var lista =  JSON.parse(JSON.stringify(this.list))
+      }
     },
     methods: {
-      addToList() {
+      addToList: function () {
         let list = [
           {
             id: 1,
-            avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3064584167,3502823640&fm=26&gp=0.jpg',
-            msg: this.msg.content,
+            avatar: '',
+            msg: 'this.msgContent[index]',
             time: 3,
             barrageStyle: 'style'
-          },
-          {
-            id: 2,
-            avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3064584167,3502823640&fm=26&gp=0.jpg',
-            msg: this.msg.content,
-            time: 8,
-            barrageStyle: 'style'
-          },
-          {
-            id: 3,
-            avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3064584167,3502823640&fm=26&gp=0.jpg',
-            msg: this.msg.content,
-            time: 10,
-            barrageStyle: 'style'
-          },
-          {
-            id: 4,
-            avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3064584167,3502823640&fm=26&gp=0.jpg',
-            msg: this.msg.content,
-            time: 5,
-            barrageStyle: 'style'
-          },
-          {
-            id: 5,
-            avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3064584167,3502823640&fm=26&gp=0.jpg',
-            msg: this.msg.content,
-            time: 6,
-            barrageStyle: 'style'
-          },
-          {
-            id: 6,
-            avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3064584167,3502823640&fm=26&gp=0.jpg',
-            msg: this.msg.content,
-            time: 12,
-            barrageStyle: 'style'
-          },
-          {
-            id: 7,
-            avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3064584167,3502823640&fm=26&gp=0.jpg',
-            msg: this.msg.content,
-            time: 5,
-            barrageStyle: 'style'
-          },
-          {
-            id: 8,
-            avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3064584167,3502823640&fm=26&gp=0.jpg',
-            msg: this.msg.content,
-            time: 5,
-            barrageStyle: 'style'
-          },
-          {
-            id: 9,
-            avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3064584167,3502823640&fm=26&gp=0.jpg',
-            msg: this.msg.content,
-            time: 8,
-            barrageStyle: 'style'
-          },
-          {
-            id: 10,
-            avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3064584167,3502823640&fm=26&gp=0.jpg',
-            msg: this.msg.content,
-            time: 10,
-            barrageStyle: 'style'
           }
-        ];
+        ]
         list.forEach((v) => {
           this.barrageList.push({
             id: v.id,
@@ -118,25 +71,36 @@
             time: v.time,
             type: MESSAGE_TYPE.NORMAL,
             barrageStyle: v.barrageStyle
-          });
-        });
-        console.log(this.item)
+          })
+        })
+        // for (let i = 0; i < this.barrageList.length; i++) {
+        //   console.log(this.barrageList[i].id)
+        //   this.barrageList.push({
+        //     id: this.posts[i].id,
+        //     data: this.posts[i],
+        //     time: 3,
+        //     type: MESSAGE_TYPE.NORMAL,
+        //     barrageStyle: 'style'
+        //   })
+        // }
+        // console.log(this.posts)
       }
     }
-  };
+  }
 </script>
 <style>
   .barrages-drop .style {
-      border-radius: 110px;
-      background: #3B6FA8;
-      color: #fff;
+    border-radius: 110px;
+    background: #3B6FA8;
+    color: #fff;
   }
+
   .barrages-drop .baberrage-stage {
-      position: absolute;
-      width: 100%;
-      height: 212px;
-      overflow: hidden;
-      top: 0;
-      margin-top: 130px;
+    position: absolute;
+    width: 100%;
+    height: 212px;
+    overflow: hidden;
+    top: 0;
+    margin-top: 130px;
   }
 </style>
