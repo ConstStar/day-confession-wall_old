@@ -269,6 +269,7 @@
     color: #303133;
     cursor: pointer;
 
+    display: inline-block;
     margin-left: 0.6rem;
     margin-right: 0.6rem;
   }

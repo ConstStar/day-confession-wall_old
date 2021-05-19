@@ -1,106 +1,107 @@
 <template>
   <div class="barrages-drop">
-    <vue-baberrage
-      :isShow="barrageIsShow"
-      :barrageList="barrageList"
-      :maxWordCount="maxWordCount"
-      :throttleGap="throttleGap"
-      :loop="barrageLoop"
-      :boxHeight="boxHeight"
-      :messageHeight="messageHeight"
+    <vue-baberrage class="baberrage-stage"
+                   :isShow="barrageIsShow"
+                   :barrageList="barrageList"
+                   :throttleGap="throttleGap"
+                   :lanesCount="lanesCount"
+                   :loop="barrageLoop"
+                   maxWordCount="60"
     >
-<!--      <template v-slot:default="slotProps">-->
-<!--        <span style="color: #000">-->
-<!--&lt;!&ndash;          {{slotProps.item.data.sender}} : {{slotProps.item.data.recipient}}&ndash;&gt;-->
-<!--          h-->
-<!--        </span>-->
-<!--      </template>-->
+      <template v-slot:default="slotProps">
+
+        <div class="name">
+          {{ slotProps.item.data.sender }}
+        </div>
+        <span class="xin">❤</span>
+        <div class="name">
+          {{ slotProps.item.data.recipient }}
+        </div>
+        <span class="fas fa-thumbs-up">
+            {{ slotProps.item.data.thumbs_up }}
+        </span>
+
+      </template>
     </vue-baberrage>
   </div>
 </template>
 <script>
-  import Vue from 'vue'
-  import { vueBaberrage, MESSAGE_TYPE } from 'vue-baberrage'
+import Vue from 'vue'
+import { vueBaberrage, MESSAGE_TYPE } from 'vue-baberrage'
 
-  Vue.use(vueBaberrage)
+Vue.use(vueBaberrage)
 
-  export default {
-    props: ['posts', 'isShow'],
-    name: 'Barrages',
-    data () {
-      return {
-        list: [],
-        barrageIsShow: this.isShow,
-        messageHeight: 3,
-        boxHeight: 150,
-        barrageLoop: true,
-        maxWordCount: 3,
-        throttleGap: 5000,
-        // 弹幕数据列表
-        barrageList: []
-      }
+export default {
+  props: ['posts', 'isShow'],
+  name: 'Barrages',
+  data () {
+    return {
+      barrageIsShow: this.isShow,
+      barrageLoop: true,
+      throttleGap: 2000,
+      lanesCount: 10, //泳道的数量
+      // 弹幕数据列表
+      barrageList: []
+    }
+  },
+  mounted () {
+    this.init()
+  },
+  watch: {
+    posts (newValue, oldValue) {
+    }
+  },
+  methods: {
+    getRandomInt: function (min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min
     },
-    mounted () {
-      this.addToList()
-    },
-    watch:{
-      posts(newValue,oldValue){
-        this.barrageList = newValue
-        for (var i = 0; i < this.barrageList.length; i++){
-          this.list.push(this.barrageList[i].content)
-        }
-        var lista =  JSON.parse(JSON.stringify(this.list))
-      }
-    },
-    methods: {
-      addToList: function () {
-        let list = [
-          {
-            id: 1,
-            avatar: '',
-            msg: 'this.msgContent[index]',
-            time: 3,
-            barrageStyle: 'style'
-          }
-        ]
-        list.forEach((v) => {
-          this.barrageList.push({
-            id: v.id,
-            avatar: v.avatar,
-            msg: v.msg,
-            time: v.time,
-            type: MESSAGE_TYPE.NORMAL,
-            barrageStyle: v.barrageStyle
-          })
+    //每隔一段时间添加一个弹幕
+    timerMonitor: function () {
+      var v = this.posts.pop()
+      if (v != undefined) {
+        this.barrageList.push({
+          id: v.id,
+          data: v,
+          time: this.getRandomInt(10, 20),
+          barrageStyle: 'barrageStyle'
         })
-        // for (let i = 0; i < this.barrageList.length; i++) {
-        //   console.log(this.barrageList[i].id)
-        //   this.barrageList.push({
-        //     id: this.posts[i].id,
-        //     data: this.posts[i],
-        //     time: 3,
-        //     type: MESSAGE_TYPE.NORMAL,
-        //     barrageStyle: 'style'
-        //   })
-        // }
-        // console.log(this.posts)
       }
+    },
+    init: function () {
+      //定时器
+      setInterval(this.timerMonitor, 500)
     }
   }
+}
 </script>
 <style>
-  .barrages-drop .style {
-    border-radius: 110px;
-    background: #3B6FA8;
-    color: #fff;
-  }
 
-  .barrages-drop .baberrage-stage {
-    position: absolute;
-    width: 100%;
-    height: 212px;
-    overflow: hidden;
-    top: 0;
-    margin-top: 130px;
-  }
+.barrages-drop .barrageStyle {
+  padding: 0.5rem;
+  border-radius: 110px;
+  /*background-color: #fff;*/
+  border: 1px solid #000;
+}
+
+.barrages-drop .baberrage-stage {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  margin-top: 130px;
+  margin-bottom: 130px;
+}
+
+.name {
+  font-weight: bold;
+  color: #303133;
+  cursor: pointer;
+
+  display: inline-block;
+  margin-left: 0.6rem;
+  margin-right: 0.6rem;
+}
+
+.xin {
+  color: red;
+}
 </style>
