@@ -37,7 +37,7 @@ export default {
   data () {
     return {
       //是否为手机端
-      isMobile: false,
+      isMobile: null,
       keyword: this.$route.params.keyword,
       posts: {},
       // 当前页
@@ -60,9 +60,9 @@ export default {
     isMobile (newValue, oldValue) {
       //根据分辨率设置分页样式
       if (newValue) {
-        this.page_layout = 'prev, pager, next, jumper'
-      } else {
         this.page_layout = 'prev, pager, next'
+      } else {
+        this.page_layout = 'prev, pager, next, jumper'
       }
     }
   },
