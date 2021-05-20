@@ -231,6 +231,8 @@ export default {
 /* 一个内容的样式 */
 .post-content {
   margin-top: 1.25rem;
+  padding: 0.8rem;
+  padding-bottom: 3rem;
   width: 100%;
   height: 45%;
   background-color: #f4f4f48a;
