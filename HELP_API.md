@@ -68,6 +68,82 @@ by 赵国庆
 
 
 
+# 数据库表结构
+
+```sql
+--
+-- 表的结构 `comment`
+--
+
+CREATE TABLE IF NOT EXISTS `comment` (
+  `id` int(11) NOT NULL COMMENT '评论id',
+  `p_id` int(11) DEFAULT NULL COMMENT '对应的帖子id',
+  `name` varchar(6) NOT NULL COMMENT '评论者姓名',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `content` varchar(160) NOT NULL COMMENT '评论内容'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `post`
+--
+
+CREATE TABLE IF NOT EXISTS `post` (
+  `id` int(11) NOT NULL COMMENT '表白id',
+  `sender` varchar(6) NOT NULL COMMENT '发送者',
+  `sender_sex` bit(2) NOT NULL COMMENT '发送者性别',
+  `recipient` varchar(6) NOT NULL COMMENT '被表白者',
+  `recipient_sex` bit(2) NOT NULL COMMENT '被表白者性别',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `content` varchar(160) NOT NULL COMMENT '表白内容',
+  `thumbs_up` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '点赞'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `p_id` (`p_id`);
+
+--
+-- Indexes for table `post`
+--
+ALTER TABLE `post`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '评论id';
+--
+-- AUTO_INCREMENT for table `post`
+--
+ALTER TABLE `post`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '表白id';
+--
+-- 限制导出的表
+--
+
+--
+-- 限制表 `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `p_id` FOREIGN KEY (`p_id`) REFERENCES `post` (`id`) ON DELETE CASCADE;
+```
+
+
+
 
 
 # 帖子内容
