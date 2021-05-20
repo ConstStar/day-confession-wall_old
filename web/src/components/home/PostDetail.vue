@@ -28,7 +28,7 @@
       <div class="comment-title">评论(共{{ CommentTotal }}条)</div>
       <ul :data="PostComment">
         <li>
-          <div v-for="(item,index) in PostComment.comments" :key="item.id">
+          <div v-for="(item,index) in PostComment.comments" :key="item.id" style="padding-bottom: 10px">
             <a href="/">{{ item.name }}：</a>
             <div style="font-size: 0.9rem">{{ item.content }}</div>
             <div style="font-size: 0.75rem">{{ toDates(item.create_time) }}</div>
@@ -155,8 +155,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1.25rem 0 1.25rem 0;
-  padding-bottom: 0.05rem;
+  height: 3rem;
   border-bottom: 0.05rem solid #999;
 }
 

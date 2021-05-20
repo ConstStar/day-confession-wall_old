@@ -1,5 +1,5 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://39.107.228.202:8081/biaobai-1.0/'
+axios.defaults.baseURL = 'http://biaobai.xiaoxiaoge.cn/'
 
 Vue.prototype.$http = axios

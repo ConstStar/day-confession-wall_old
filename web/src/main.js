@@ -6,7 +6,9 @@ import './assets/css/reset.css'
 import './assets/css/global.css'
 import './assets/Iconiconfont/css/all.css'
 import { vueBaberrage } from 'vue-baberrage'
+import $ from 'jquery'
 
+Vue.prototype.$ = $;
 // 全局模块
 
 // 弹幕
