@@ -17,9 +17,30 @@
 
 
 
-#### 接口手册&数据库表结构
+### 接口手册&数据库表结构
 
 [HELP_API](/HELP_API.md)
+
+
+
+### 快速使用
+
+1. 编译vue并替换到webapp（注意保留webapp/WEB-INF文件夹）
+
+2. 创建数据库，[数据库表结构](/HELP_API.md#数据库表结构)
+
+3. 修改resources/db.properties 设置数据库
+
+	```properties
+	 # JDBC
+	 driver=com.mysql.cj.jdbc.Driver
+	 # 数据库连接
+	 url=jdbc:mysql://xxx.xxx.xxx.xxx:3306/xxxx?userSSL=false&useUnicode=true&characterEncoding=UTF-8
+	 # 数据库账号
+	 username=xxx
+	 # 数据库密码
+	 password=xxx
+	```
 
 
 
@@ -41,6 +62,12 @@
 | element       | 网站快速成型工具       | https://element.eleme.cn/#                       |
 | QRCode        | 前端二维码生成器       | http://davidshimjs.github.io/qrcodejs/           |
 | Vue-baberrage | Vue弹幕插件            | http://blog.chenhaotaishuaile.com/vue-baberrage/ |
+
+
+
+## 开源许可证
+
+[GPL-3.0 license](/LICENSE)
 
 
 
