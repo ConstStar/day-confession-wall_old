@@ -1,3 +1,6 @@
+#项目已重写，新项目地址[](https://github.com/constStar/wall)
+
+
 ## 表白墙
 
 简单的表白墙网站
