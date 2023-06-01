@@ -1,4 +1,4 @@
-# 项目已重写，新项目地址[https://github.com/constStar/wall](https://github.com/constStar/wall)
+# 项目已重写，新项目地址[https://github.com/star-love-letter/](https://github.com/star-love-letter/)
 
 
 ## 表白墙
